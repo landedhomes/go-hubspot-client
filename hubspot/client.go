@@ -1,10 +1,5 @@
 package hubspot
 
-import (
-	// "net/http"
-	// "fmt"
-)
-
 // Client provides methods to interact with Hubspot API
 type Client struct {
 	apiKey string

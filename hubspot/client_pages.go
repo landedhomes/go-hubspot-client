@@ -5,19 +5,28 @@ import (
 	"encoding/json"
 )
 
+// PageBody is the request body for POST/PUT requests on Hubspot Page API calls
 type PageBody struct{
-	Name string `json:"name"`
-	Slug string `json:"slug"`
-	Template string `json:"template_path"`
+	Campaign string `json:"campaign,omitempty"`
+	CampaignName string `json:"campaign_name,omitempty"`
+	FooterHTML string `json:"footer_html,omitempty"`
+	HeadHTML string `json:"head_html,omitempty"`
+	IsDraft string `json:"is_draft,omitempty"`
+	MetaDescription string `json:"meta_description,omitempty"`
+	MetaKeywords string `json:"meta_keywords,omitempty"`
+	Name string `json:"name,omitempty"`
+	Password string `json:"password,omitempty"`
+	PublishDate int64 `json:"publish_date,omitempty"`
+	PublishImmediately string `json:"publish_immediately,omitempty"`
+	Slug string `json:"slug,omitempty"`
+	Subcategory string `json:"subcategory,omitempty"`
+	WidgetContainers string `json:"widget_containers,omitempty"`
+	Widgets string `json:"widgets,omitempty"`
+	Template string `json:"template_path,omitempty"`
 }
 
-func (c *Client) SavePage() (Response, error) {
-	req := PageBody{
-		Name: "Test Event Page",
-		Slug: "events/adsalkfjdask",
-		Template: "landed/Templates/CX Event Page/event-page-template.html",
-	}
-
+// SavePage sends the user PageBody as a request to the Hubspot SavePage API
+func (c *Client) SavePage(req *PageBody) (Response, error) {
 	body, err := json.Marshal(req)
 
 	if err != nil {

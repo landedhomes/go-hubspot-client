@@ -7,6 +7,7 @@ import (
 	"bytes"
 )
 
+// Request is the standard struct use for all HTTP calls
 type Request struct {
 	URL          string
 	Method       string
@@ -14,11 +15,13 @@ type Request struct {
 	OkStatusCode int
 }
 
+// Response is the standard struct use for all HTTP calls response
 type Response struct {
 	Body       []byte
 	StatusCode int
 }
 
+// SendRequest is the helper function use for all HTTP calls
 func SendRequest(r Request) (Response, error) {
 	client := &http.Client{}
 
@@ -42,7 +45,7 @@ func SendRequest(r Request) (Response, error) {
 	}
 
 	if resp.StatusCode != r.OkStatusCode {
-		return Response{}, fmt.Errorf("Error: %s details: %s\n", resp.Status, body)
+		return Response{}, fmt.Errorf("Error: %s details: %s", resp.Status, body)
 	}
 	return Response{Body: body, StatusCode: resp.StatusCode}, nil
 }
