@@ -7,8 +7,10 @@ type ClientInterface interface {
 
 	// Contact List Property
 	GetContactsInList(listID string) (Response, error)
-
 	CreateList(req *ListBody) (Response, error)
+
+	// Contact Property
+	GetContactPropertyByName(contactName string) (Response, error)
 }
 
 var _ ClientInterface = &Client{}
