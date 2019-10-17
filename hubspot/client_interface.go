@@ -5,8 +5,10 @@ type ClientInterface interface {
 	// Pages
 	SavePage(request *PageBody) (Response, error)
 
-	// Contact Property
+	// Contact List Property
+	GetContactsInList(listID string) (Response, error)
 
+	CreateList(req *ListBody) (Response, error)
 }
 
 var _ ClientInterface = &Client{}

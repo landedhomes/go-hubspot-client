@@ -40,6 +40,7 @@ func SendRequest(r Request) (Response, error) {
 	defer resp.Body.Close()
 
 	body, err := ioutil.ReadAll(resp.Body)
+
 	if err != nil {
 		return Response{}, err
 	}
