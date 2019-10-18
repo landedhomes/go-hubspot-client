@@ -15,6 +15,7 @@ type PageBody struct{
 	MetaDescription string `json:"meta_description,omitempty"`
 	MetaKeywords string `json:"meta_keywords,omitempty"`
 	Name string `json:"name,omitempty"`
+	Title string `json:"html_title,omitempty"`
 	Password string `json:"password,omitempty"`
 	PublishDate int64 `json:"publish_date,omitempty"`
 	PublishImmediately string `json:"publish_immediately,omitempty"`
