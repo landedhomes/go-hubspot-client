@@ -39,8 +39,6 @@ func (c *Client) CreateList(req *ListBody) (Response, error) {
 		return Response{}, fmt.Errorf("Invalid request: %s", err.Error())
 	}
 
-	fmt.Printf("%s\n", body)
-
 	response, err := SendRequest(Request{
 		URL:			fmt.Sprintf("https://api.hubapi.com/contacts/v1/lists?hapikey=%s", c.apiKey),
 		Method:			"POST",
