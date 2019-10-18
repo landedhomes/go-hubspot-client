@@ -45,7 +45,7 @@ func (c *Client) CreateList(req *ListBody) (Response, error) {
 		URL:			fmt.Sprintf("https://api.hubapi.com/contacts/v1/lists?hapikey=%s", c.apiKey),
 		Method:			"POST",
 		Body:			body,
-		OkStatusCode: 	201,
+		OkStatusCode: 	200,
 	})
 
 	return response, err
