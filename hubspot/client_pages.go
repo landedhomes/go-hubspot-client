@@ -11,14 +11,14 @@ type PageBody struct{
 	CampaignName string `json:"campaign_name,omitempty"`
 	FooterHTML string `json:"footer_html,omitempty"`
 	HeadHTML string `json:"head_html,omitempty"`
-	IsDraft string `json:"is_draft,omitempty"`
+	IsDraft bool `json:"is_draft,omitempty"`
 	MetaDescription string `json:"meta_description,omitempty"`
 	MetaKeywords string `json:"meta_keywords,omitempty"`
 	Name string `json:"name,omitempty"`
 	Title string `json:"html_title,omitempty"`
 	Password string `json:"password,omitempty"`
 	PublishDate int64 `json:"publish_date,omitempty"`
-	PublishImmediately string `json:"publish_immediately,omitempty"`
+	PublishImmediately bool `json:"publish_immediately,omitempty"`
 	Slug string `json:"slug,omitempty"`
 	Subcategory string `json:"subcategory,omitempty"`
 	WidgetContainers string `json:"widget_containers,omitempty"`
