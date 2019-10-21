@@ -4,6 +4,7 @@ package hubspot
 type ClientInterface interface {
 	// Pages
 	SavePage(request *PageBody) (Response, error)
+	PublishPage(request *PublishPageBody, id string) (Response, error)
 
 	// Contact List Property
 	GetContactsInList(listID string) (Response, error)

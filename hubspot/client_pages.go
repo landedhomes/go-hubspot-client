@@ -26,6 +26,15 @@ type PageBody struct{
 	Template string `json:"template_path,omitempty"`
 }
 
+// PublishPageBody is the request body for the Hubspot Publish/Unpublish Page API
+// Action takes in a string of either
+// 1) push-buffer-live
+// 2) schedule-publish
+// 3) cancel-publish
+type PublishPageBody struct{
+	Action string `json:"action`
+}
+
 // SavePage sends the user PageBody as a request to the Hubspot SavePage API
 func (c *Client) SavePage(req *PageBody) (Response, error) {
 	body, err := json.Marshal(req)
@@ -39,6 +48,23 @@ func (c *Client) SavePage(req *PageBody) (Response, error) {
 		Method:			"POST",
 		Body:			body,
 		OkStatusCode: 	201,
+	})
+
+	return response, err
+}
+
+func (c *Client) PublishPage(req *PublishPageBody, id string) (Response, error) {
+	body, err := json.Marshal(req)
+
+	if err != nil {
+		return Response{}, fmt.Errorf("Invalid request: %s", err.Error())
+	}
+
+	response, err := SendRequest(Request{
+		URL:			fmt.Sprintf("https://api.hubapi.com/content/api/v2/pages/%s/publish-action?hapikey=%s", id, c.apiKey),
+		Method:			"POST",
+		Body:			body,
+		OkStatusCode:	200,
 	})
 
 	return response, err
