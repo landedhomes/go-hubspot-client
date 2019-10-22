@@ -57,8 +57,6 @@ func (c *Client) SavePage(req *PageBody) (Response, error) {
 func (c *Client) PublishPage(req *PublishPageBody, id string) (Response, error) {
 	body, err := json.Marshal(req)
 
-	fmt.Println(string(body))
-
 	if err != nil {
 		return Response{}, fmt.Errorf("Invalid request: %s", err.Error())
 	}
