@@ -32,7 +32,7 @@ type PageBody struct{
 // 2) schedule-publish
 // 3) cancel-publish
 type PublishPageBody struct{
-	Action string `json:"action`
+	Action string `json:"action"`
 }
 
 // SavePage sends the user PageBody as a request to the Hubspot SavePage API
@@ -53,8 +53,11 @@ func (c *Client) SavePage(req *PageBody) (Response, error) {
 	return response, err
 }
 
+// PublishPage publish a page according to the Action given in the request body
 func (c *Client) PublishPage(req *PublishPageBody, id string) (Response, error) {
 	body, err := json.Marshal(req)
+
+	fmt.Println(string(body))
 
 	if err != nil {
 		return Response{}, fmt.Errorf("Invalid request: %s", err.Error())
@@ -64,7 +67,18 @@ func (c *Client) PublishPage(req *PublishPageBody, id string) (Response, error) 
 		URL:			fmt.Sprintf("https://api.hubapi.com/content/api/v2/pages/%s/publish-action?hapikey=%s", id, c.apiKey),
 		Method:			"POST",
 		Body:			body,
-		OkStatusCode:	200,
+		OkStatusCode:	204,
+	})
+
+	return response, err
+}
+
+// DeletePage deletes a page from Hubspot given the Page ID
+func (c *Client) DeletePage(id string) (Response, error) {
+	response, err := SendRequest(Request{
+		URL:			fmt.Sprintf("https://api.hubspot.com/content/api/v2/pages/%s?hapikey=%s", id, c.apiKey),
+		Method:			"DELETE",
+		OkStatusCode:	204,
 	})
 
 	return response, err

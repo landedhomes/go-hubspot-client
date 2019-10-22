@@ -48,3 +48,14 @@ func (c *Client) CreateList(req *ListBody) (Response, error) {
 
 	return response, err
 }
+
+// DeleteList remove a Hubspot List given the List ID
+func (c *Client) DeleteList(listID string) (Response, error) {
+	response, err := SendRequest(Request{
+		URL:			fmt.Sprintf("https://api.hubapi.com/contacts/v1/lists/%s?hapikey=%s", listID, c.apiKey),
+		Method:			"DELETE",
+		OkStatusCode:	204,
+	})
+
+	return response, err
+}
