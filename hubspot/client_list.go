@@ -49,6 +49,24 @@ func (c *Client) CreateList(req *ListBody) (Response, error) {
 	return response, err
 }
 
+// UpdateList update an existing list on Hubspot with metadata from req body
+func (c *Client) UpdateList(req *ListBody, listID string) (Response, error) {
+	body, err:= json.Marshal(req)
+
+	if err != nil {
+		return Response{}, fmt.Errorf("Invalid request: %s", err.Error())
+	}
+
+	response, err := SendRequest(Request{
+		URL:			fmt.Sprintf("https://api.hubapi.com/contacts/v1/lists/%s?hapikey=%s", listID, c.apiKey),
+		Method:			"POST",
+		Body:			body,
+		OkStatusCode:	200,
+	})
+
+	return response, err
+}
+
 // DeleteList remove a Hubspot List given the List ID
 func (c *Client) DeleteList(listID string) (Response, error) {
 	response, err := SendRequest(Request{

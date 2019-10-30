@@ -53,6 +53,22 @@ func (c *Client) SavePage(req *PageBody) (Response, error) {
 	return response, err
 }
 
+// UpdatePage update an existing page on hubspot using req body metadata
+func (c *Client) UpdatePage(req *PageBody, id string) (Response, error) {
+	body, err := json.Marshal(req)
+
+	if err != nil {
+		return Response{}, fmt.Errorf("Invalid request: %s", err.Error())
+	}
+
+	response, err := SendRequest(Request{
+		URL:			fmt.Sprintf("http://api.hubapi.com/content/api/v2/pages/%s?hapikey=%s", id c.apiKey),
+		Method:			"POST",
+		Body:			body,
+		OkStatusCode:	201,
+	})
+}
+
 // PublishPage publish a page according to the Action given in the request body
 func (c *Client) PublishPage(req *PublishPageBody, id string) (Response, error) {
 	body, err := json.Marshal(req)
