@@ -62,11 +62,13 @@ func (c *Client) UpdatePage(req *PageBody, id string) (Response, error) {
 	}
 
 	response, err := SendRequest(Request{
-		URL:			fmt.Sprintf("http://api.hubapi.com/content/api/v2/pages/%s?hapikey=%s", id c.apiKey),
+		URL:			fmt.Sprintf("http://api.hubapi.com/content/api/v2/pages/%s?hapikey=%s", id, c.apiKey),
 		Method:			"POST",
 		Body:			body,
 		OkStatusCode:	201,
 	})
+
+	return response, err
 }
 
 // PublishPage publish a page according to the Action given in the request body

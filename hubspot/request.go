@@ -1,6 +1,7 @@
 package hubspot
 
 import (
+	"encoding/json"
 	"io/ioutil"
 	"net/http"
 	"fmt"
@@ -19,6 +20,14 @@ type Request struct {
 type Response struct {
 	Body       []byte
 	StatusCode int
+}
+
+type HubspotError struct {
+	Details		HubspotErrorDetails `json:"details`
+}
+
+type HubspotErrorDetails struct {
+	ErrorType	string	`json:"errorType"`
 }
 
 // SendRequest is the helper function use for all HTTP calls
@@ -46,7 +55,9 @@ func SendRequest(r Request) (Response, error) {
 	}
 
 	if resp.StatusCode != r.OkStatusCode {
-		return Response{}, fmt.Errorf("Error: %s details: %s", resp.Status, body)
+		var hubspotErrorResponse HubspotError
+		err = json.Unmarshal([]byte(body), &hubspotErrorResponse)
+		return Response{}, fmt.Errorf(hubspotErrorResponse.Details.ErrorType)
 	}
 	return Response{Body: body, StatusCode: resp.StatusCode}, nil
 }
