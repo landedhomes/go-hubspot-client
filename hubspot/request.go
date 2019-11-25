@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"fmt"
+	"log"
 	"bytes"
 )
 
@@ -23,10 +24,6 @@ type Response struct {
 }
 
 type HubspotError struct {
-	Details		HubspotErrorDetails `json:"details`
-}
-
-type HubspotErrorDetails struct {
 	ErrorType	string	`json:"errorType"`
 }
 
@@ -57,7 +54,7 @@ func SendRequest(r Request) (Response, error) {
 	if resp.StatusCode != r.OkStatusCode {
 		var hubspotErrorResponse HubspotError
 		err = json.Unmarshal([]byte(body), &hubspotErrorResponse)
-		return Response{}, fmt.Errorf(hubspotErrorResponse.Details.ErrorType)
+		return Response{Body: []byte(hubspotErrorResponse.ErrorType), StatusCode: resp.StatusCode}, fmt.Errorf(hubspotErrorResponse.ErrorType)
 	}
 	return Response{Body: body, StatusCode: resp.StatusCode}, nil
 }
