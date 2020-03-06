@@ -6,8 +6,8 @@ type Client struct {
 }
 
 // NewClient instantiates a new client to interact with Hubspot
-func NewClient(api string) *Client {
+func NewClient(apikey string) *Client {
 	return &Client{
-		apiKey:	api,
+		apiKey: apikey,
 	}
 }
