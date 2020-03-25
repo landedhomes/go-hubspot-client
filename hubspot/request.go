@@ -1,11 +1,11 @@
 package hubspot
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
-	"fmt"
-	"bytes"
 )
 
 // Request is the standard struct use for all HTTP calls
@@ -23,7 +23,7 @@ type Response struct {
 }
 
 type HubspotError struct {
-	ErrorType	string	`json:"errorType"`
+	ErrorType string `json:"errorType"`
 }
 
 // SendRequest is the helper function use for all HTTP calls

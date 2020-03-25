@@ -16,6 +16,7 @@ type ClientInterface interface {
 
 	// Contact Property
 	GetContactPropertyByName(contactName string) (Response, error)
+	UpdateContact(contactVID string, properties *Properties) (Response, error)
 }
 
 var _ ClientInterface = &Client{}
