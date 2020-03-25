@@ -17,5 +17,3 @@ type ClientInterface interface {
 	// Contact Property
 	GetContactPropertyByName(contactName string) (Response, error)
 }
-
-var _ ClientInterface = &Client{}
